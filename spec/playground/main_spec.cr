@@ -34,5 +34,11 @@ describe "Playground" do
       Playground::Main.new([] of String, runner, IO::Memory.new).run
       runner.program.should eq nil
     end
+
+    it "is not calling program runner when help is asked for" do
+      runner = TestProgramRunner.new
+      Playground::Main.new(["-p", "HttpServer", "-h"] of String, runner, IO::Memory.new).run
+      runner.program.should eq nil
+    end
   end
 end

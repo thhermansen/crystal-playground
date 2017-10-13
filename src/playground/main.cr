@@ -23,6 +23,7 @@ module Playground
       @stdout : IO = STDOUT
     )
       @program = ProgramChoice::NotSet
+      @help_printed = false
     end
 
     def run
@@ -41,7 +42,7 @@ module Playground
 
         parser.on "-h", "--help", "Show this help" do
           puts parser
-          help_printed = true
+          @help_printed = true
         end
       end
     end
@@ -66,7 +67,7 @@ module Playground
     end
 
     private def chosen_program?
-      !(@program.nil? || @program == ProgramChoice::NotSet)
+      !(@program.nil? || @program == ProgramChoice::NotSet || @help_printed)
     end
   end
 end
