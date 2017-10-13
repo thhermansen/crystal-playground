@@ -2,6 +2,15 @@
 
 This is a repository where I play with https://crystal-lang.org/
 
+## Develop
+
+On MacOS I had to export env var:
+
+```bash
+echo $PKG_CONFIG_PATH
+/usr/local/opt/openssl/lib/pkgconfig
+```
+
 ## Build
 
 `crystal build --release -o bin/playground src/playground.cr`
