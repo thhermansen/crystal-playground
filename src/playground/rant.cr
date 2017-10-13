@@ -1,3 +1,5 @@
+require "./rant/**"
+
 module Playground::Rant
   class Main
     @ranters = [] of Ranter
