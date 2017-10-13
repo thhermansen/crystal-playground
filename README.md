@@ -11,6 +11,10 @@ echo $PKG_CONFIG_PATH
 /usr/local/opt/openssl/lib/pkgconfig
 ```
 
+You can build and boot app by:
+
+```crystal src/playground.cr -- -p HttpServer```
+
 ## Build
 
 `crystal build --release -o bin/playground src/playground.cr`
