@@ -28,5 +28,11 @@ describe "Playground" do
       Playground::Main.new(["-p", "HttpServer"] of String, runner, IO::Memory.new).run
       runner.program.should eq Playground::Main::ProgramChoice::HttpServer
     end
+
+    it "is not calling program runner if program is NotSet" do
+      runner = TestProgramRunner.new
+      Playground::Main.new([] of String, runner, IO::Memory.new).run
+      runner.program.should eq nil
+    end
   end
 end

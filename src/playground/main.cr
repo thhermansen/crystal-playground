@@ -56,13 +56,17 @@ module Playground
       if @program.nil?
         puts "You selected a program we do not have. Please try again, one of: #{PROGRAM_NAMES}"
         puts "\n\n#{@parser}"
-      else
+      elsif chosen_program?
         @program_runner.call @program
       end
     end
 
     private def puts(*args)
       @stdout.puts *args
+    end
+
+    private def chosen_program?
+      !(@program.nil? || @program == ProgramChoice::NotSet)
     end
   end
 end
