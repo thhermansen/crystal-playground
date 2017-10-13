@@ -1,0 +1,13 @@
+name: playground
+version: 0.1.0
+
+authors:
+  - Thorbjørn Hermansen <thhermansen@gmail.com>
+
+targets:
+  playground:
+    main: src/playground.cr
+
+crystal: 0.23.1
+
+license: MIT
