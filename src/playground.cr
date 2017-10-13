@@ -5,14 +5,13 @@ require "./playground/*"
 module Playground
   enum ProgramChoice
     NotSet
-    Invalid
 
     HttpServer
     Rant
   end
 
   program = ProgramChoice::NotSet
-  program_names = ProgramChoice.names[2..-1]
+  program_names = ProgramChoice.names[1..-1] # Don't want to expose the first one
 
   parser = OptionParser.parse! do |parser|
     parser.banner = "Usage: playground [arguments]"
