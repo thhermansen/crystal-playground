@@ -5,7 +5,7 @@ module Playground
     def call(program)
       case program
       when Main::ProgramChoice::HttpServer
-        raise "Not yet implemented"
+        HttpServer.listen
       when Main::ProgramChoice::Rant
         Rant::Main.new.call
       else
