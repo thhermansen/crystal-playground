@@ -23,12 +23,12 @@ module Playground
       @stdout : IO = STDOUT
     )
       @program = ProgramChoice::NotSet
-      @help_printed = false
+      @print_help = false
     end
 
     def run
       create_parser_and_parse_options
-      print_help_if_no_program_selected
+      print_help_if_asked_for_or_if_no_program_selected
       run_selected_program
     end
 
@@ -41,14 +41,13 @@ module Playground
         end
 
         parser.on "-h", "--help", "Show this help" do
-          puts parser
-          @help_printed = true
+          @print_help = true
         end
       end
     end
 
-    private def print_help_if_no_program_selected
-      return unless @program == ProgramChoice::NotSet
+    private def print_help_if_asked_for_or_if_no_program_selected
+      return unless @print_help || @program == ProgramChoice::NotSet
 
       puts @parser
     end
@@ -67,7 +66,7 @@ module Playground
     end
 
     private def chosen_program?
-      !(@program.nil? || @program == ProgramChoice::NotSet || @help_printed)
+      !(@program.nil? || @program == ProgramChoice::NotSet || @print_help)
     end
   end
 end
