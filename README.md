@@ -1,6 +1,10 @@
-# playground
+# Playground
 
 This is a repository where I play with https://crystal-lang.org/
+
+## Build
+
+`crystal build --release -o bin/playground src/playground.cr`
 
 ## Contributing
 
