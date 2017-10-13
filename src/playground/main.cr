@@ -9,23 +9,20 @@ module Playground
       Rant
     end
 
+    PROGRAM_NAMES = ProgramChoice.names[1..-1] # Don't want to expose the first one
+
     abstract class ProgramRunner
       abstract def call(program : ProgramChoice)
     end
 
-    @program = nil
-    @program_names = [] of String
+    @program : ProgramChoice | Nil
 
     def initialize(
-      args : Array(String),
-      program_runner : ProgramRunner,
-      stdout : IO = STDOUT
+      @args : Array(String),
+      @program_runner : ProgramRunner,
+      @stdout : IO = STDOUT
     )
-      @args = args
-      @stdout = stdout
-      @program_runner = program_runner
       @program = ProgramChoice::NotSet
-      @program_names = ProgramChoice.names[1..-1] # Don't want to expose the first one
     end
 
     def run
@@ -38,7 +35,7 @@ module Playground
       @parser = OptionParser.parse(@args) do |parser|
         parser.banner = "Usage: playground [arguments]"
 
-        parser.on "-p", "--program=NAME", "One of: #{@program_names}" do |name|
+        parser.on "-p", "--program=NAME", "One of: #{PROGRAM_NAMES}" do |name|
           @program = ProgramChoice.parse? name
         end
 
@@ -57,7 +54,7 @@ module Playground
 
     private def run_selected_program
       if @program.nil?
-        puts "You selected a program we do not have. Please try again, one of: #{@program_names}"
+        puts "You selected a program we do not have. Please try again, one of: #{PROGRAM_NAMES}"
         puts "\n\n#{@parser}"
       else
         @program_runner.call @program
