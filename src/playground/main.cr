@@ -8,6 +8,7 @@ module Playground
 
       HttpServer
       Rant
+      Prime
     end
 
     PROGRAM_NAMES = ProgramChoice.names[2..-1] # Don't want to expose the first one
