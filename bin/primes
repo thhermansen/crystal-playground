@@ -1,0 +1,18 @@
+#! /usr/bin/env bash
+
+echo "============================"
+echo "STARTING RUBY (only 250 000)"
+echo "============================"
+time ruby ruby/primes.rb
+
+echo ""
+echo "=================="
+echo "AND NODE (500 000)"
+echo "=================="
+time node node/prime.js
+
+echo ""
+echo "====================="
+echo "AND CRYSTAL (500 000)"
+echo "====================="
+time bin/playground -p Prime

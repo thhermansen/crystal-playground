@@ -9,7 +9,7 @@ module Playground
       when Main::ProgramChoice::Rant
         Rant::Main.new.call
       when Main::ProgramChoice::Prime
-        primes = Prime.new.each.first(500_000).to_a
+        primes = Prime.new.first(500_000).to_a
         puts "Generated #{primes.size} primes"
       else
         raise "Unsupported program #{program}"
