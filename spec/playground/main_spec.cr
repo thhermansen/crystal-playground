@@ -4,7 +4,7 @@ require "../../src/playground/main"
 private class TestProgramRunner < Playground::Main::ProgramRunner
   getter program
 
-  def call(@program : Playground::Main::ProgramChoice | Nil)
+  def call(@program : Playground::Main::ProgramChoice)
   end
 end
 

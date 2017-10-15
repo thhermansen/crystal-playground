@@ -4,18 +4,19 @@ module Playground
   class Main
     enum ProgramChoice
       NotSet
+      Invalid
 
       HttpServer
       Rant
     end
 
-    PROGRAM_NAMES = ProgramChoice.names[1..-1] # Don't want to expose the first one
+    PROGRAM_NAMES = ProgramChoice.names[2..-1] # Don't want to expose the first one
 
     abstract class ProgramRunner
       abstract def call(program : ProgramChoice)
     end
 
-    @program : ProgramChoice | Nil
+    @program : ProgramChoice
 
     def initialize(
       @args : Array(String),
@@ -37,7 +38,7 @@ module Playground
         parser.banner = "Usage: playground [arguments]"
 
         parser.on "-p", "--program=NAME", "One of: #{PROGRAM_NAMES}" do |name|
-          @program = ProgramChoice.parse? name
+          @program = ProgramChoice.parse?(name) || ProgramChoice::Invalid
         end
 
         parser.on "-h", "--help", "Show this help" do
@@ -53,7 +54,7 @@ module Playground
     end
 
     private def run_selected_program
-      if @program.nil?
+      if @program == ProgramChoice::Invalid
         puts "You selected a program we do not have. Please try again, one of: #{PROGRAM_NAMES}"
         puts "\n\n#{@parser}"
       elsif chosen_program?
